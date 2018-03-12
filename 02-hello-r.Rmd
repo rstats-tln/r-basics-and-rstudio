@@ -91,6 +91,8 @@ You can only create objects by assigning them some value(s) or even empty struct
 
 > Note that `<-` is the assignment operator in R
 
+
+### Excercises
 Suppose you want to calculate your body mass index. 
 Body mass index (BMI) is calculated from height in m and weight in kg using following formula:
 
