@@ -3,6 +3,7 @@ title: "Hello R"
 author: "Taavi Päll"
 date: "26 3 2018"
 output: 
+  github_document: default
   html_document:
     theme: united
     highlight: tango
