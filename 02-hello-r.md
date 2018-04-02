@@ -154,12 +154,15 @@ pnorm(my_bmi, mean_bmi, sd_bmi, lower.tail = FALSE)
 
 It appears that ~39% of males have smaller BMI than me and ~61% have higher BMI than me..
 
-Let's put my number onto plot:
+Let's put my BMI onto plot:
 
 ``` r
+library(tidyverse)
 set.seed(123)
-hist(rnorm(1000, mean_bmi, sd_bmi), 30)
-abline(v = my_bmi, lty = "dashed")
+df <- data_frame(y = rnorm(1000, mean_bmi, sd_bmi))
+ggplot(data = df) +
+  geom_density(mapping = aes(y)) +
+  geom_vline(xintercept = my_bmi, linetype = "dashed", color = "blue")
 ```
 
 > The big advantage of doing calculations with variables is reusability.
