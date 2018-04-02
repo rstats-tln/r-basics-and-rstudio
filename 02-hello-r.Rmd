@@ -2,12 +2,11 @@
 title: "Hello R"
 author: "Taavi Päll"
 date: "26 3 2018"
-output: 
-  github_document: default
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 Credit: @jennybc, @datacamp
 
@@ -180,11 +179,11 @@ The + operator works with numeric variables in R.
 
 If you really tried to calculate BMI using "weight" and "height", and assigned a text value to the variable my_weight (see the chunk below), you would be trying to assign the calculation using of a numeric and a character variable to the variable my_height. This is not possible!
 
-```{r}
+```{r, eval=FALSE}
 my_weight <- "forty five"
 ```
 
-```{r}
+```{r, eval=FALSE}
 my_bmi <- my_weight / (my_height^2)
 ```
 

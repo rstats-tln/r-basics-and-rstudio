@@ -33,20 +33,28 @@ In its most basic form, R can be used as a simple calculator. Consider the follo
 5 + 5
 ```
 
+    ## [1] 10
+
 ``` r
 # A subtraction
 5 - 5 
 ```
+
+    ## [1] 0
 
 ``` r
 # A multiplication
 3 * 5
 ```
 
+    ## [1] 15
+
 ``` r
 # A division
 (5 + 5) / 2
 ```
+
+    ## [1] 5
 
 ### Exercise
 
@@ -55,6 +63,8 @@ In its most basic form, R can be used as a simple calculator. Consider the follo
 ``` r
 2 ^ 8
 ```
+
+    ## [1] 256
 
 Variable assignment
 -------------------
@@ -81,12 +91,16 @@ x <- 42
 x
 ```
 
+    ## [1] 42
+
 `Error: object 'x' not found` means that object with name x does not exists. Have a look at your Environment. Do you see object x? You can only create objects by assigning them some value(s) or even empty structure.
 
 ``` r
 y <- vector()
 y
 ```
+
+    ## logical(0)
 
 > Note that `<-` is the assignment operator in R
 
@@ -114,6 +128,8 @@ Type: my\_weight into chunk below. This will print out the value of my\_weight:
 my_weight
 ```
 
+    ## [1] 73
+
 BMI formula also needs height.
 
 Please create also the variable **my\_height** and assign the value of your height in meters to it:
@@ -131,6 +147,8 @@ Calculate BMI and have R simply print the result.
 my_weight / my_height ^ 2
 ```
 
+    ## [1] 25.25952
+
 In order to use calculated BMI value in downstream analyses or visualizations you need to assign it to a new variable, let's call it my\_bmi.
 
 Assign the result of BMI calculation to a new variable my\_bmi.
@@ -140,6 +158,8 @@ my_bmi <- my_weight / my_height ^ 2
 my_bmi
 ```
 
+    ## [1] 25.25952
+
 Where am I with my body mass index compared to general population?
 
 ``` r
@@ -148,9 +168,16 @@ mean_bmi <- 27
 sd_bmi <-  6
 # prob. of smaller values
 pnorm(my_bmi, mean_bmi, sd_bmi)
+```
+
+    ## [1] 0.3858772
+
+``` r
 # prob. of larger values
 pnorm(my_bmi, mean_bmi, sd_bmi, lower.tail = FALSE)
 ```
+
+    ## [1] 0.6141228
 
 It appears that ~39% of males have smaller BMI than me and ~61% have higher BMI than me..
 
@@ -158,12 +185,28 @@ Let's put my BMI onto plot:
 
 ``` r
 library(tidyverse)
+```
+
+    ## ── Attaching packages ──────────────────────────────────────────────────── tidyverse 1.2.1 ──
+
+    ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
+    ## ✔ tidyr   0.8.0     ✔ stringr 1.3.0
+    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
+
+    ## ── Conflicts ─────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+
+``` r
 set.seed(123)
 df <- data_frame(y = rnorm(1000, mean_bmi, sd_bmi))
 ggplot(data = df) +
   geom_density(mapping = aes(y)) +
   geom_vline(xintercept = my_bmi, linetype = "dashed", color = "blue")
 ```
+
+![](02-hello-r_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 > The big advantage of doing calculations with variables is reusability.
 
@@ -196,9 +239,21 @@ R works with numerous data types. Some of the most basic types to get started ar
 
 ``` r
 TRUE + TRUE
+```
+
+    ## [1] 2
+
+``` r
 FALSE + TRUE
+```
+
+    ## [1] 1
+
+``` r
 T + F
 ```
+
+    ## [1] 1
 
 -   Text (or string) values are called characters.
 
@@ -219,6 +274,8 @@ my_logical <- FALSE
 pi
 ```
 
+    ## [1] 3.141593
+
 Note how the quotation marks on the chunk above indicate that "some text" is a character.
 
 ### What's that data type?
@@ -237,13 +294,23 @@ my_logical <- FALSE
 
 # Check class of my_numeric
 class(my_numeric)
+```
 
+    ## [1] "numeric"
+
+``` r
 # Check class of my_character
 class(my_character)
+```
 
+    ## [1] "character"
+
+``` r
 # Check class of my_logical
 class(my_logical)
 ```
+
+    ## [1] "logical"
 
 Data structures
 ---------------
@@ -254,30 +321,68 @@ Different types are coerced into one type
 
 ``` r
 c(1, "a")
+```
+
+    ## [1] "1" "a"
+
+``` r
 c(T, 1)
+```
+
+    ## [1] 1 1
+
+``` r
 c(F, "a")
 ```
+
+    ## [1] "FALSE" "a"
 
 ``` r
 v <- 1:10
 v
+```
+
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+
+``` r
 class(v)
 ```
 
+    ## [1] "integer"
+
 ``` r
 letters
+```
+
+    ##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
+    ## [18] "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
+``` r
 LETTERS
 ```
+
+    ##  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q"
+    ## [18] "R" "S" "T" "U" "V" "W" "X" "Y" "Z"
 
 ``` r
 month.abb
 ```
 
+    ##  [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov"
+    ## [12] "Dec"
+
 ``` r
 f <- rnorm(1000)
 mean(f)
+```
+
+    ## [1] 0.04246525
+
+``` r
 sd(f)
 ```
+
+    ## [1] 1.009674
 
 ``` r
 fm <- matrix(f, ncol = 4)
@@ -290,6 +395,9 @@ df <- data.frame(months = month.abb, values = rnorm(12))
 ``` r
 df[5, 1]
 ```
+
+    ## [1] May
+    ## Levels: Apr Aug Dec Feb Jan Jul Jun Mar May Nov Oct Sep
 
 ``` r
 mylist <- list(df, fm, f)
